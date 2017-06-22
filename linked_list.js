@@ -57,6 +57,51 @@ class LinkedList {
     }
 
 }
+
+function size(list){
+  let node = list.head;
+  let counter = 1;
+  while(node.next !== null){
+    counter++;
+    node = node.next;
+  }
+  return counter;
+}
+
+
+function isEmpty(list){
+  let node = list.head;
+  if(node === null){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function findPrevious(list, index){
+  let node = list.head;
+  // let previous = null;
+  for(let i = 0; i < index - 1; i++){
+    // previous = node;
+    node = node.next;
+
+  }
+  return node;
+}
+
+function display(list) {
+  return JSON.stringify(list, null, 2);
+}
+
+function findLast(list){
+  let node = list.head;
+  while(node.next !== null){
+    node = node.next;
+  }
+  return node;
+}
+
+
 //traverses to tail
 //finds middle based on half of length
 function getMiddle(list) {
@@ -77,8 +122,9 @@ function findThirdFromTail(list){
   let node = list.head;
   let counter = 0;
   while(node.next !== null){
-    node = node.next;
     counter++;
+    node = node.next;
+
   }
   return list._find(counter-3);
 }
@@ -88,47 +134,23 @@ function findThirdFromTail(list){
 
 function reverseList(list){
   let node = list.head;
-  let values = [];
-  let counter = 0;
-  values.push(findTail(list).value);
-
+  let reversed = new LinkedList();
   while(node.next !== null){
-    values.push(node.value);
+    reversed.insert(0, node.value);
     node = node.next;
-    console.log(values);
-    counter++;
-    //pointer of next needs to point to previous - without losing reference of the next element
-    //trail1 = node;
-    //node = node.next;
-    //trail1.next = trail2.next;
-    // trail1.next = trail2.next;
-    // trail1 = node;
-    // node = node.next;
   }
-  let counter1 = counter;
-  console.log(values);
-  //if list is 10 items long
-  //index 0 will pull item 10, index 1 pulls item 9, etc
-  // let node1 = list.head;
-  const newList = new LinkedList();
-  for(let i = 0; i <= counter1; i++){
-    newList.insert(i, values[counter]);
-    // node1.value = values[i];
-    // node1 = node1.next;
-    counter--;
-  }
-
-  return newList;
-
+  return reversed;
 }
-//   trail 2 -> trail 1 -> node
-//   trail 2 <- trail 1 <- node <- node.next
-//
+
+function findTail(list){
+  return list._find(list.length - 1);
+}
+
 
 const list = new LinkedList();
 list.insert(0,5);
 list.insert(1,6);
-list.insert(2,7);
+// list.insert(2,7);
 list.insert(2,'this is the middle');
 list.insert(3,'Yolo');
 list.insert(4,7);
@@ -138,8 +160,8 @@ list.insert(4,7);
 // console.log(list._find(3));
 // console.log(getMiddle(list));
 // console.log(findThirdFromTail(list));
-console.log(JSON.stringify(reverseList(list)));
-function findTail(list){
-  return list._find(list.length - 1);
-}
-
+// console.log(JSON.stringify(reverseList(list)));
+// console.log(list);
+// console.log(findPrevious(list, 3));
+console.log(display(list));
+console.log(findLast(list));
